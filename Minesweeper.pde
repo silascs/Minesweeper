@@ -23,20 +23,24 @@ void setup ()
         for(int col = 0; col < 20;col++)
         {
             buttons[row][col] = new MSButton(row,col);
+
         }
     }
 
   
-        setBombs();
+       setBombs();
 
 }
-public void setBombs()
+public void setBombs()  
 {
-    int placeR = (int)(Math.random()*NUM_ROWS);
-    int placeC = (int)(Math.random()*NUM_COLS);
-    if(!bombs.contains(buttons[placeR][placeC]))
+    for(int i= 0; i < 40; i++)
     {
-        bombs.add(buttons[placeR][placeC]);
+        int placeR = (int)(Math.random()*NUM_ROWS);
+        int placeC = (int)(Math.random()*NUM_COLS);
+        if(!bombs.contains(buttons[placeR][placeC]))
+        {
+            bombs.add(buttons[placeR][placeC]);
+        }
     }
 }
 
@@ -44,7 +48,7 @@ public void draw ()
 {
     background( 0 );
     if(isWon())
-        displayWinningMessage();
+       displayWinningMessage();
 }
 public boolean isWon()
 {
@@ -86,8 +90,8 @@ public class MSButton
     
     public MSButton ( int rr, int cc )
     {
-        // width = 400/NUM_COLS;
-        // height = 400/NUM_ROWS;
+        width = 400/NUM_COLS;
+        height = 400/NUM_ROWS;
         r = rr;
         c = cc; 
         x = c*width;
@@ -157,13 +161,13 @@ public class MSButton
     {    
         if (marked)
             fill(0);
-        // else if( clicked && bombs.contains(this) ) 
-        //     fill(255,0,0);
+        else if( clicked && bombs.contains(this) ) 
+             fill(255,0,0);
         else if(clicked)
             fill( 200 );
         else 
             fill( 100 );
-
+        System.out.println(x +", " + y);
         rect(x, y, width, height);
         fill(0);
         text(label,x+width/2,y+height/2);
